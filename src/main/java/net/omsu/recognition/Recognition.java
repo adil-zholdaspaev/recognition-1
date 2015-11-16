@@ -5,7 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 import static net.omsu.recognition.Numbers.COLUMNS;
+import static net.omsu.recognition.Numbers.FIVE;
+import static net.omsu.recognition.Numbers.FOUR;
 import static net.omsu.recognition.Numbers.LINES;
+import static net.omsu.recognition.Numbers.ONE;
+import static net.omsu.recognition.Numbers.SIX;
+import static net.omsu.recognition.Numbers.THREE;
+import static net.omsu.recognition.Numbers.TWO;
 
 /**
  *
@@ -31,10 +37,9 @@ public class Recognition {
     public void makeNoisy() {
 
         Random rand = new Random();
-        rand.setSeed(100);
         for (int i = 0; i < LINES; i++) {
             for (int j = 0; j < COLUMNS; j++) {
-                if ((Math.abs(rand.nextInt()) % 100) < noisyPersent) {
+                if ((rand.nextInt() % 100) < noisyPersent) {
                     number[i][j] = (number[i][j] + 1) % 2;
                 }
             }
@@ -43,9 +48,12 @@ public class Recognition {
 
     public void recognize() {
         final List<int[][]> numbers = new ArrayList<int[][]>();
-        numbers.add(Numbers.ONE);
-        numbers.add(Numbers.TWO);
-        numbers.add(Numbers.THREE);
+        numbers.add(ONE);
+        numbers.add(TWO);
+        numbers.add(THREE);
+        numbers.add(FOUR);
+        numbers.add(FIVE);
+        numbers.add(SIX);
 
         double distance = 0;
         double min = 10000;
@@ -82,7 +90,7 @@ public class Recognition {
     }
 
     public static void main(String[] args) {
-        Recognition recognition = new Recognition(50, Numbers.TWO, 1);
+        Recognition recognition = new Recognition(35, FIVE, 2);
         recognition.print();
         recognition.makeNoisy();
         recognition.print();
