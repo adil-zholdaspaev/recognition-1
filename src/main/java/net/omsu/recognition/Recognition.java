@@ -35,14 +35,14 @@ public class Recognition {
     }
 
     public void makeNoisy() {
-
+        int numbers = (int) Math.floor((45 * noisyPersent) / 100);
         Random rand = new Random();
-        for (int i = 0; i < LINES; i++) {
-            for (int j = 0; j < COLUMNS; j++) {
-                if ((rand.nextInt() % 100) < noisyPersent) {
-                    number[i][j] = (number[i][j] + 1) % 2;
-                }
-            }
+
+        for (int i = 0; i < numbers; i++) {
+            int index = Math.abs(rand.nextInt() % 45);
+            int line = (int) Math.floor(index / 5);
+            int column = index % 5;
+            number[line][column] = (number[line][column] + 1) % 2;
         }
     }
 
@@ -90,7 +90,7 @@ public class Recognition {
     }
 
     public static void main(String[] args) {
-        Recognition recognition = new Recognition(35, FIVE, 2);
+        Recognition recognition = new Recognition(45, FIVE, 1);
         recognition.print();
         recognition.makeNoisy();
         recognition.print();
